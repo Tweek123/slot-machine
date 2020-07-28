@@ -46,7 +46,7 @@ class Slot {
         this.ticker.add(() => {
             switch (this.movement) {
                 case 'start':
-                    increas += 0.01;
+                    increas += 0.01;//увеличение скорости
                     this.slotSprite.tilePosition.y  = this.slotSprite.tilePosition.y + increas*this.speed;
                     break;
                 
@@ -55,7 +55,7 @@ class Slot {
                     break;
                 
                 case 'end':
-                    if(increas > 0.005) {
+                    if(increas > 0.005) {//уменьшение скорости
                         increas -= 0.005;
                     }
 
@@ -65,9 +65,10 @@ class Slot {
                 case 'stop':
                     this.slotSprite.tilePosition.y  = this.slotSprite.tilePosition.y + increas*this.speed;
                     
-                    if( 95 <= Math.round(this.slotSprite.tilePosition.y)%100) {
-                        this.slotSprite.tilePosition.y = Math.round(this.slotSprite.tilePosition.y/100)*100;
-                        this.position = this.slotSprite.tilePosition.y/100;
+                    if( 95 <= Math.round(this.slotSprite.tilePosition.y)%100) { //если вращение достигло конца ячейки
+                        this.slotSprite.tilePosition.y = Math.round(this.slotSprite.tilePosition.y/100)*100;//занять конечную позицию ячейки
+                        this.position = this.slotSprite.tilePosition.y/100;//определение позиции, т.к. высота всех ячеек 100 и 
+                                                                           //суммарная высота спрайта 300 деление на 100 определяет текущую позицию ячейки
                         this.ticker.stop();
                         this.movement = 'noMove';
                         increas = 0;
@@ -75,7 +76,7 @@ class Slot {
                     break;
             }
 
-            if(this.slotSprite.tilePosition.y >= 300) {
+            if(this.slotSprite.tilePosition.y >= 300) {//обнуление позиции спрайта после прохода всех ячеек
                 this.slotSprite.tilePosition.y = 0;
             }
         });

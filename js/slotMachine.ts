@@ -41,7 +41,7 @@ class SlotMachine {
 
     protected checkWon():void {//проверка выиграша
         let won = true;
-        this.slots.reduce((prev,curr) => {
+        this.slots.reduce((prev,curr) => {//если позиции всех слотов равны, выиграли.
             if(prev.position != curr.position) {
               won = false;
             }
